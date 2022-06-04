@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a25edb26260422449a02d0cc5a16df6, type: 3}
+  m_Name: GameConfiguration
+  m_EditorClassIdentifier: 
+  physicsGravity: -30
+  playerViewPrefab: {fileID: 6287400853801687007, guid: 74bbef2e6a1b02f48a1f465c2968714b, type: 3}
+  platformViewPrefab: {fileID: 1605687116298264581, guid: a8dab580095c0f64d811b6f87b5fa8df, type: 3}
+  startingPlatformSide: 0
+  minPlatformSpawnHeight: 2
+  maxPlatformSpawnHeight: 7
