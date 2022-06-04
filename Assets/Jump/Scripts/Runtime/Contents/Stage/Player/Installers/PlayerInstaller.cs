@@ -3,6 +3,7 @@ using Juce.Core.Disposables;
 using Juce.Core.Factories;
 using Juce.Core.Repositories;
 using Template.Contents.Services.Configuration.Service;
+using Template.Contents.Stage.Platform.UseCases.DespawnOldestPlatform;
 using Template.Contents.Stage.Platform.UseCases.IsPlatformIndexFromLastPlatformSpawned;
 using Template.Contents.Stage.Platform.UseCases.TrySpawnNextPlatform;
 using Template.Contents.Stage.Player.Factories;
@@ -39,6 +40,7 @@ namespace Template.Contents.Stage.Player.Installers
             container.Bind<IPlayerCollidedWithPlatformUseCase>()
                 .FromFunction(c => new PlayerCollidedWithPlatformUseCase(
                     c.Resolve<ITrySpawnNextPlatformUseCase>(),
+                    c.Resolve<IDespawnOldestPlatformUseCase>(),
                     c.Resolve<IIsPlatformIndexFromLastPlatformSpawnedUseCase>(),
                     c.Resolve<ISwitchPlayerDirectionUseCase>()
                     ));

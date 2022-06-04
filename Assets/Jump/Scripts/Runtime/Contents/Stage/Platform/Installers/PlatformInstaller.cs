@@ -4,6 +4,8 @@ using Juce.Core.Factories;
 using Juce.Core.Repositories;
 using Template.Contents.Services.Configuration.Service;
 using Template.Contents.Stage.Platform.Factories;
+using Template.Contents.Stage.Platform.UseCases.DespawnOldestPlatform;
+using Template.Contents.Stage.Platform.UseCases.DespawnPlatform;
 using Template.Contents.Stage.Platform.UseCases.GetNextPlatformSpawnHeight;
 using Template.Contents.Stage.Platform.UseCases.IsPlatformIndexFromLastPlatformSpawned;
 using Template.Contents.Stage.Platform.UseCases.SpawnPlatform;
@@ -38,6 +40,11 @@ namespace Template.Contents.Stage.Platform.Installers
                     c.Resolve<StageContextInstance>().PlatformViewsRightSpawnPosition
                     ));
 
+            container.Bind<IDespawnPlatformUseCase>()
+                .FromFunction(c => new DespawnPlatformUseCase(
+                    c.Resolve<IRepository<IDisposable<PlatformView>>>()
+                    ));
+
             container.Bind<IGetNextPlatformSpawnHeightUseCase>()
                 .FromFunction(c => new GetNextPlatformSpawnHeightUseCase(
                     c.Resolve<PlatformSpawnData>(),
@@ -52,6 +59,12 @@ namespace Template.Contents.Stage.Platform.Installers
                     c.Resolve<ISingleRepository<IDisposable<PlayerView>>>(),
                     c.Resolve<IGetNextPlatformSpawnHeightUseCase>(),
                     c.Resolve<ISpawnPlatformUseCase>()
+                    ));
+
+            container.Bind<IDespawnOldestPlatformUseCase>()
+                .FromFunction(c => new DespawnOldestPlatformUseCase(
+                    c.Resolve<IRepository<IDisposable<PlatformView>>>(),
+                    c.Resolve<IDespawnPlatformUseCase>()
                     ));
 
             container.Bind<ITryGetClosetPlatformToPlayerUseCase>()
