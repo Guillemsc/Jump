@@ -1,4 +1,4 @@
-﻿using Template.Contents.Stage.Platform.Factories;
+﻿using Template.Contents.Stage.Platform.Data;
 
 namespace Template.Contents.Stage.Platform.UseCases.GetNextPlatformSpawnHeight
 {

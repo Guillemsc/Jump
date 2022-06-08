@@ -1,6 +1,6 @@
 ﻿using Juce.Core.Direction;
 
-namespace Template.Contents.Stage.Platform.Factories
+namespace Template.Contents.Stage.Platform.Data
 {
     public sealed class PlatformSpawnData
     {

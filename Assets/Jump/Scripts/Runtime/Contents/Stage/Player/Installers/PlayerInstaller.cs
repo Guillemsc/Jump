@@ -7,6 +7,8 @@ using Template.Contents.Stage.Platform.UseCases.DespawnOldestPlatform;
 using Template.Contents.Stage.Platform.UseCases.IsPlatformIndexFromLastPlatformSpawned;
 using Template.Contents.Stage.Platform.UseCases.TrySpawnNextPlatform;
 using Template.Contents.Stage.Player.Factories;
+using Template.Contents.Stage.Player.UseCases.PlayerCollided;
+using Template.Contents.Stage.Player.UseCases.PlayerCollidedWithDeath;
 using Template.Contents.Stage.Player.UseCases.PlayerCollidedWithPlatform;
 using Template.Contents.Stage.Player.UseCases.SetInitialPlayerDirection;
 using Template.Contents.Stage.Player.UseCases.SpawnPlayer;
@@ -34,15 +36,26 @@ namespace Template.Contents.Stage.Player.Installers
                     c.Resolve<IFactory<PlayerViewFactoryDefinition, IDisposable<PlayerView>>>(),
                     c.Resolve<ISingleRepository<IDisposable<PlayerView>>>(),
                     c.Resolve<StageContextInstance>().PlayerViewSpawnPosition,
-                    c.Resolve<IPlayerCollidedWithPlatformUseCase>()
+                    c.Resolve<IPlayerCollidedUseCase>()
+                    ));
+
+            container.Bind<IPlayerCollidedUseCase>()
+                .FromFunction(c => new PlayerCollidedUseCase(
+                    c.Resolve<IPlayerCollidedWithPlatformUseCase>(),
+                    c.Resolve<IPlayerCollidedWithDeathUseCase>()
                     ));
 
             container.Bind<IPlayerCollidedWithPlatformUseCase>()
                 .FromFunction(c => new PlayerCollidedWithPlatformUseCase(
+                    c.Resolve<ISingleRepository<IDisposable<PlayerView>>>(),
                     c.Resolve<ITrySpawnNextPlatformUseCase>(),
                     c.Resolve<IDespawnOldestPlatformUseCase>(),
                     c.Resolve<IIsPlatformIndexFromLastPlatformSpawnedUseCase>(),
                     c.Resolve<ISwitchPlayerDirectionUseCase>()
+                    ));
+
+            container.Bind<IPlayerCollidedWithDeathUseCase>()
+                .FromFunction(c => new PlayerCollidedWithDeathUseCase(
                     ));
 
             container.Bind<ISetInitialPlayerDirectionUseCase>()

@@ -15,6 +15,8 @@ namespace Template.Contents.Shared.Configuration
         [Header("Player")]
         [SerializeField] private PlayerView playerViewPrefab = default;
         [SerializeField] private HorizontalDirection initialPlayerDirection = default;
+        [SerializeField] private float playerMaxJumpStrenght = default;
+        [SerializeField] private Vector2 playerJumpForceMultiplierByCharge = default;
 
         [Header("Platform")]
         [SerializeField] private PlatformView platformViewPrefab = default;
@@ -22,15 +24,21 @@ namespace Template.Contents.Shared.Configuration
         [SerializeField, Min(0)] private float minPlatformSpawnHeight = default;
         [SerializeField, Min(0)] private float maxPlatformSpawnHeight = default;
 
+        [Header("Death")]
+        [SerializeField, Min(0)] private float deathColliderOffset = default;
+
         public float PhysicsGravity => physicsGravity;
 
         public PlayerView PlayerViewPrefab => playerViewPrefab;
         public HorizontalDirection InitialPlayerDirection => initialPlayerDirection;
+        public float PlayerMaxJumpStrenght => playerMaxJumpStrenght;
+        public Vector2 PlayerJumpForceMultiplierByCharge => playerJumpForceMultiplierByCharge;
 
         public PlatformView PlatformViewPrefab => platformViewPrefab;
         public HorizontalDirection StartingPlatformSide => startingPlatformSide;
         public float MinPlatformSpawnHeight => minPlatformSpawnHeight;
         public float MaxPlatformSpawnHeight => maxPlatformSpawnHeight;
 
+        public float DeathColliderOffset => deathColliderOffset;
     }
 }

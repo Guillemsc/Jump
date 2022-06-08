@@ -1,7 +1,7 @@
 ﻿using Juce.Core.Direction;
 using Juce.Core.Disposables;
 using Juce.Core.Repositories;
-using Template.Contents.Stage.Platform.Factories;
+using Template.Contents.Stage.Platform.Data;
 using Template.Contents.Stage.Platform.UseCases.GetNextPlatformSpawnHeight;
 using Template.Contents.Stage.Platform.UseCases.SpawnPlatform;
 using Template.Contents.Stage.Player.Views;

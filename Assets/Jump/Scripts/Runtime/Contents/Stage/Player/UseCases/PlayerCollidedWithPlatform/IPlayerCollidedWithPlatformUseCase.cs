@@ -1,9 +1,9 @@
-﻿using Template.Contents.Stage.Platform.Views;
+﻿using Template.Contents.Stage.Physics.Colliders;
 
 namespace Template.Contents.Stage.Player.UseCases.PlayerCollidedWithPlatform
 {
     public interface IPlayerCollidedWithPlatformUseCase 
     {
-        void Execute(PlatformView platformView);
+        void Execute(PlatformCollider platformCollider);
     }
 }

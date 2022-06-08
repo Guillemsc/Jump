@@ -2,7 +2,7 @@
 using Juce.Core.Factories;
 using Juce.Core.Repositories;
 using Template.Contents.Stage.Player.Factories;
-using Template.Contents.Stage.Player.UseCases.PlayerCollidedWithPlatform;
+using Template.Contents.Stage.Player.UseCases.PlayerCollided;
 using Template.Contents.Stage.Player.Views;
 using UnityEngine;
 
@@ -13,19 +13,19 @@ namespace Template.Contents.Stage.Player.UseCases.SpawnPlayer
         private readonly IFactory<PlayerViewFactoryDefinition, IDisposable<PlayerView>> factory;
         private readonly ISingleRepository<IDisposable<PlayerView>> repository;
         private readonly Transform spawnPosition;
-        private readonly IPlayerCollidedWithPlatformUseCase playerCollidedWithPlatformUseCase;
+        private readonly IPlayerCollidedUseCase playerCollidedUseCase;
 
         public SpawnPlayerUseCase(
             IFactory<PlayerViewFactoryDefinition, IDisposable<PlayerView>> factory,
             ISingleRepository<IDisposable<PlayerView>> repository,
             Transform spawnPosition,
-            IPlayerCollidedWithPlatformUseCase playerCollidedWithPlatformUseCase
+            IPlayerCollidedUseCase playerCollidedUseCase
             )
         {
             this.factory = factory;
             this.repository = repository;
             this.spawnPosition = spawnPosition;
-            this.playerCollidedWithPlatformUseCase = playerCollidedWithPlatformUseCase;
+            this.playerCollidedUseCase = playerCollidedUseCase;
         }
 
         public void Execute()
@@ -44,7 +44,7 @@ namespace Template.Contents.Stage.Player.UseCases.SpawnPlayer
 
             instance.Value.transform.position = spawnPosition.transform.position;
 
-            instance.Value.OnPlayerCollidedWithPlatform += playerCollidedWithPlatformUseCase.Execute;
+            instance.Value.OnPlayerCollided += playerCollidedUseCase.Execute;
         }
     }
 }

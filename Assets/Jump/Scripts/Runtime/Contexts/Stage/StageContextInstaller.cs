@@ -8,6 +8,7 @@ using Template.Contents.Stage.Player.Installers;
 using Template.Contents.Stage.Physics.Installers;
 using Template.Contents.Stage.Camera.Installers;
 using Template.Contents.Stage.Platform.Installers;
+using Template.Contents.Stage.Death.Installers;
 
 namespace Template.Contexts.Stage
 {
@@ -26,6 +27,7 @@ namespace Template.Contexts.Stage
             container.InstallCamera();
             container.InstallPlayer();
             container.InstallPlatform();
+            container.InstallDeath();
 
             container.Bind<IStageContextInteractor>().FromFunction(c => new StageContextInteractor(
                 c.Resolve<ILoadStageUseCase>(),

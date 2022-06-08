@@ -3,6 +3,7 @@ using Juce.Core.Disposables;
 using Juce.Core.Factories;
 using Juce.Core.Repositories;
 using Template.Contents.Services.Configuration.Service;
+using Template.Contents.Stage.Platform.Data;
 using Template.Contents.Stage.Platform.Factories;
 using Template.Contents.Stage.Platform.UseCases.DespawnOldestPlatform;
 using Template.Contents.Stage.Platform.UseCases.DespawnPlatform;

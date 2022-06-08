@@ -89,7 +89,7 @@ MonoBehaviour:
           wantsToBeBinded: 0
           binded: 0
           bindedVariableName: 
-          FallbackValue: 0.3
+          FallbackValue: 0.2
         easing:
           bindingEnabled: 0
           wantsToBeBinded: 0
@@ -566,7 +566,7 @@ MonoBehaviour:
           wantsToBeBinded: 0
           binded: 0
           bindedVariableName: 
-          FallbackValue: 0.3
+          FallbackValue: 0.2
         easing:
           bindingEnabled: 0
           wantsToBeBinded: 0
@@ -606,7 +606,7 @@ MonoBehaviour:
           wantsToBeBinded: 0
           binded: 0
           bindedVariableName: 
-          FallbackValue: 1
+          FallbackValue: 0.2
 --- !u!1 &6947365456568424491
 GameObject:
   m_ObjectHideFlags: 0

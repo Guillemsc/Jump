@@ -17,6 +17,9 @@ namespace Template.Contexts.Stage
         [SerializeField] private Transform platformViewsLeftSpawnPosition = default;
         [SerializeField] private Transform platformViewsRightSpawnPosition = default;
 
+        [Header("Death")]
+        [SerializeField] private Transform deathCollider = default;
+
         public CinemachineVirtualCamera VirtualCamera => virtualCamera;
 
         public Transform PlayerViewParent => playerViewParent;
@@ -25,5 +28,7 @@ namespace Template.Contexts.Stage
         public Transform PlatformViewsParent => platformViewsParent;
         public Transform PlatformViewsLeftSpawnPosition => platformViewsLeftSpawnPosition;
         public Transform PlatformViewsRightSpawnPosition => platformViewsRightSpawnPosition;
+
+        public Transform DeathCollider => deathCollider;
     }
 }

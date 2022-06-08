@@ -1,6 +1,6 @@
 ﻿using Juce.CoreUnity.Physics;
 using System;
-using Template.Contents.Stage.Platform.Views;
+using Template.Contents.Stage.Physics.Colliders;
 using UnityEngine;
 
 namespace Template.Contents.Stage.Player.Views
@@ -13,7 +13,7 @@ namespace Template.Contents.Stage.Player.Views
 
         public PlayerViewController PlayerViewController => playerViewController;
 
-        public event Action<PlatformView> OnPlayerCollidedWithPlatform;
+        public event Action<ICollider> OnPlayerCollided;
 
         private void Awake()
         {
@@ -22,14 +22,14 @@ namespace Template.Contents.Stage.Player.Views
 
         private void OnPhysicsTriggerEnter(PhysicsCallbacks physicsCallbacks, ColliderData colliderData)
         {
-            PlatformView platformView = colliderData.Collider.GetComponentInParent<PlatformView>();
+            ICollider collider = colliderData.Collider.GetComponent<ICollider>();
 
-            if(platformView == null)
+            if(collider == null)
             {
                 return;
             }
 
-            OnPlayerCollidedWithPlatform?.Invoke(platformView);
+            OnPlayerCollided?.Invoke(collider);
         }
     }
 }

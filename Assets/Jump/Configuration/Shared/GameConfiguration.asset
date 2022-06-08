@@ -14,7 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   physicsGravity: -30
   playerViewPrefab: {fileID: 6287400853801687007, guid: 74bbef2e6a1b02f48a1f465c2968714b, type: 3}
+  initialPlayerDirection: 0
+  playerMaxJumpStrenght: 0.7
+  playerJumpForceMultiplierByCharge: {x: 450, y: 2000}
   platformViewPrefab: {fileID: 1605687116298264581, guid: a8dab580095c0f64d811b6f87b5fa8df, type: 3}
   startingPlatformSide: 0
   minPlatformSpawnHeight: 2
   maxPlatformSpawnHeight: 7
+  deathColliderOffset: 1

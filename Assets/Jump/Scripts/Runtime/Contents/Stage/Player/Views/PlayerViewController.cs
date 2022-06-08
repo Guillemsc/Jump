@@ -1,6 +1,9 @@
 ﻿using Juce.Core.Direction;
 using Juce.Core.Time;
+using Juce.CoreUnity.Service;
 using Juce.CoreUnity.Time;
+using Juce.TweenComponent;
+using Template.Contents.Services.Configuration.Service;
 using UnityEngine;
 
 namespace Template.Contents.Stage.Player.Views
@@ -10,13 +13,19 @@ namespace Template.Contents.Stage.Player.Views
         [Header("References")]
         [SerializeField] private Rigidbody rigidBody = default;
 
-        [Header("Valuse")]
-        [SerializeField] private Vector2 forceMultiplierByCharge = Vector2.one;
+        [Header("Tweens")]
+        [SerializeField] private TweenPlayer groundedTween = default;
+        [SerializeField] private TweenPlayer squashTween = default;
+        [SerializeField] private TweenPlayer jumpTween = default;
 
         private readonly ITimer chargeJumpTimer = new ScaledUnityTimer();
 
+        CachedService<IConfigurationService> configurationService;
+
         private bool chargingJump;
         private int direction = 1;
+
+        bool canJump;
 
         private void Update()
         {
@@ -46,6 +55,15 @@ namespace Template.Contents.Stage.Player.Views
             direction *= -1;
         }
 
+        public void SetAsGrounded()
+        {
+            groundedTween.Play();
+            squashTween.Kill();
+            jumpTween.Kill();
+
+            canJump = true;
+        }
+
         private void HandleInput()
         {
             if(Input.GetKeyDown(KeyCode.Space))
@@ -69,6 +87,10 @@ namespace Template.Contents.Stage.Player.Views
             chargingJump = true;
 
             chargeJumpTimer.Restart();
+
+            groundedTween.Kill();
+            jumpTween.Kill();
+            squashTween.Play();
         }
 
         private void ReleaseChargingJump()
@@ -82,11 +104,17 @@ namespace Template.Contents.Stage.Player.Views
 
             float timeCharging = (float)chargeJumpTimer.Time.TotalSeconds;
 
-            Vector2 force = forceMultiplierByCharge * timeCharging;
+            float jumpStrength = Mathf.Min(timeCharging, configurationService.Value.GameConfiguration.PlayerMaxJumpStrenght);
+
+            Vector2 force = configurationService.Value.GameConfiguration.PlayerJumpForceMultiplierByCharge * jumpStrength;
 
             force.x *= direction;
 
             rigidBody.AddForce(force, ForceMode.Force);
+
+            groundedTween.Kill();
+            squashTween.Kill();
+            jumpTween.Play();
         }
     }
 }
