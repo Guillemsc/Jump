@@ -15,8 +15,10 @@ namespace Template.Contents.Shared.Configuration
         [Header("Player")]
         [SerializeField] private PlayerView playerViewPrefab = default;
         [SerializeField] private HorizontalDirection initialPlayerDirection = default;
-        [SerializeField] private float playerMaxJumpStrenght = default;
+        [SerializeField, Min(0)] private float playerMaxJumpStrenght = default;
+        [SerializeField, Min(0)] private float playerMinJumpStrenght = default;
         [SerializeField] private Vector2 playerJumpForceMultiplierByCharge = default;
+        [SerializeField, Min(0)] private float playerCanJumpAgainMinTime = default;
 
         [Header("Platform")]
         [SerializeField] private PlatformView platformViewPrefab = default;
@@ -32,7 +34,9 @@ namespace Template.Contents.Shared.Configuration
         public PlayerView PlayerViewPrefab => playerViewPrefab;
         public HorizontalDirection InitialPlayerDirection => initialPlayerDirection;
         public float PlayerMaxJumpStrenght => playerMaxJumpStrenght;
+        public float PlayerMinJumpStrenght => playerMinJumpStrenght;
         public Vector2 PlayerJumpForceMultiplierByCharge => playerJumpForceMultiplierByCharge;
+        public float PlayerCanJumpAgainMinTime => playerCanJumpAgainMinTime;
 
         public PlatformView PlatformViewPrefab => platformViewPrefab;
         public HorizontalDirection StartingPlatformSide => startingPlatformSide;

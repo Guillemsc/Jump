@@ -2,30 +2,29 @@
 using Juce.Core.Time;
 using Juce.CoreUnity.Service;
 using Juce.CoreUnity.Time;
-using Juce.TweenComponent;
+using System;
 using Template.Contents.Services.Configuration.Service;
 using UnityEngine;
 
 namespace Template.Contents.Stage.Player.Views
 {
-    public sealed class PlayerViewController : MonoBehaviour
+    public sealed class PlayerViewMovementController : MonoBehaviour
     {
         [Header("References")]
         [SerializeField] private Rigidbody rigidBody = default;
-
-        [Header("Tweens")]
-        [SerializeField] private TweenPlayer groundedTween = default;
-        [SerializeField] private TweenPlayer squashTween = default;
-        [SerializeField] private TweenPlayer jumpTween = default;
+        [SerializeField] private PlayerViewGroundedController playerViewGroundedController = default;
 
         private readonly ITimer chargeJumpTimer = new ScaledUnityTimer();
+        private readonly ITimer canJumpAgainTimer = new ScaledUnityTimer();
 
         CachedService<IConfigurationService> configurationService;
 
         private bool chargingJump;
         private int direction = 1;
 
-        bool canJump;
+        public event Action OnChargingJumpStarted;
+        public event Action OnChargingJumpFinished;
+        public event Action OnChargingJumpCanceled;
 
         private void Update()
         {
@@ -55,15 +54,6 @@ namespace Template.Contents.Stage.Player.Views
             direction *= -1;
         }
 
-        public void SetAsGrounded()
-        {
-            groundedTween.Play();
-            squashTween.Kill();
-            jumpTween.Kill();
-
-            canJump = true;
-        }
-
         private void HandleInput()
         {
             if(Input.GetKeyDown(KeyCode.Space))
@@ -79,7 +69,20 @@ namespace Template.Contents.Stage.Player.Views
 
         private void StartChargingJump()
         {
-            if(chargingJump)
+            if (chargingJump)
+            {
+                return;
+            }
+
+            if (!playerViewGroundedController.IsGrounded)
+            {
+                return;
+            }
+
+            bool canJumpAgain = !canJumpAgainTimer.Started
+                || canJumpAgainTimer.HasReached(TimeSpan.FromSeconds(configurationService.Value.GameConfiguration.PlayerCanJumpAgainMinTime));
+
+            if (!canJumpAgain)
             {
                 return;
             }
@@ -88,9 +91,7 @@ namespace Template.Contents.Stage.Player.Views
 
             chargeJumpTimer.Restart();
 
-            groundedTween.Kill();
-            jumpTween.Kill();
-            squashTween.Play();
+            OnChargingJumpStarted?.Invoke();
         }
 
         private void ReleaseChargingJump()
@@ -102,6 +103,16 @@ namespace Template.Contents.Stage.Player.Views
 
             chargingJump = false;
 
+            canJumpAgainTimer.Restart();
+
+            bool hasNecessaryForce = chargeJumpTimer.Time.TotalSeconds > configurationService.Value.GameConfiguration.PlayerMinJumpStrenght;
+
+            if (!hasNecessaryForce)
+            {
+                OnChargingJumpCanceled?.Invoke();
+                return;
+            }
+
             float timeCharging = (float)chargeJumpTimer.Time.TotalSeconds;
 
             float jumpStrength = Mathf.Min(timeCharging, configurationService.Value.GameConfiguration.PlayerMaxJumpStrenght);
@@ -112,9 +123,7 @@ namespace Template.Contents.Stage.Player.Views
 
             rigidBody.AddForce(force, ForceMode.Force);
 
-            groundedTween.Kill();
-            squashTween.Kill();
-            jumpTween.Play();
+            OnChargingJumpFinished?.Invoke();
         }
     }
 }

@@ -44,7 +44,7 @@ namespace Template.Contents.Stage.Player.UseCases.SpawnPlayer
 
             instance.Value.transform.position = spawnPosition.transform.position;
 
-            instance.Value.OnPlayerCollided += playerCollidedUseCase.Execute;
+            instance.Value.PlayerViewCollisionsController.OnPlayerCollided += playerCollidedUseCase.Execute;
         }
     }
 }

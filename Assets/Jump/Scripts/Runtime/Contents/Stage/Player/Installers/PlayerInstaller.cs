@@ -47,7 +47,6 @@ namespace Template.Contents.Stage.Player.Installers
 
             container.Bind<IPlayerCollidedWithPlatformUseCase>()
                 .FromFunction(c => new PlayerCollidedWithPlatformUseCase(
-                    c.Resolve<ISingleRepository<IDisposable<PlayerView>>>(),
                     c.Resolve<ITrySpawnNextPlatformUseCase>(),
                     c.Resolve<IDespawnOldestPlatformUseCase>(),
                     c.Resolve<IIsPlatformIndexFromLastPlatformSpawnedUseCase>(),

@@ -12,21 +12,18 @@ namespace Template.Contents.Stage.Player.UseCases.PlayerCollidedWithPlatform
 {
     public class PlayerCollidedWithPlatformUseCase : IPlayerCollidedWithPlatformUseCase
     {
-        private readonly IReadOnlySingleRepository<IDisposable<PlayerView>> playerRepository;
         private readonly ITrySpawnNextPlatformUseCase trySpawnNextPlatformUseCase;
         private readonly IDespawnOldestPlatformUseCase despawnOldestPlatformUseCase;
         private readonly IIsPlatformIndexFromLastPlatformSpawnedUseCase isPlatformIndexFromLastPlatformSpawnedUseCase;
         private readonly ISwitchPlayerDirectionUseCase switchPlayerDirectionUseCase;
 
         public PlayerCollidedWithPlatformUseCase(
-            IReadOnlySingleRepository<IDisposable<PlayerView>> playerRepository,
             ITrySpawnNextPlatformUseCase trySpawnNextPlatformUseCase,
             IDespawnOldestPlatformUseCase despawnOldestPlatformUseCase,
             IIsPlatformIndexFromLastPlatformSpawnedUseCase isPlatformIndexFromLastPlatformSpawnedUseCase,
             ISwitchPlayerDirectionUseCase switchPlayerDirectionUseCase
             )
         {
-            this.playerRepository = playerRepository;
             this.trySpawnNextPlatformUseCase = trySpawnNextPlatformUseCase;
             this.despawnOldestPlatformUseCase = despawnOldestPlatformUseCase;
             this.isPlatformIndexFromLastPlatformSpawnedUseCase = isPlatformIndexFromLastPlatformSpawnedUseCase;
@@ -54,15 +51,6 @@ namespace Template.Contents.Stage.Player.UseCases.PlayerCollidedWithPlatform
             }
 
             switchPlayerDirectionUseCase.Execute();
-
-            bool playerFound = playerRepository.TryGet(out IDisposable<PlayerView> playerView);
-
-            if (!playerFound)
-            {
-                return;
-            }
-
-            playerView.Value.PlayerViewController.SetAsGrounded();
         }
     }
 }
