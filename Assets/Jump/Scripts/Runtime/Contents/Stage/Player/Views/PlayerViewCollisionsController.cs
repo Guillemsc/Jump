@@ -1,4 +1,4 @@
-﻿using Juce.CoreUnity.Physics;
+﻿using Juce.CoreUnity.Physics.Callbacks;
 using System;
 using Template.Contents.Stage.Physics.Colliders;
 using UnityEngine;
@@ -17,16 +17,16 @@ namespace Template.Contents.Stage.Player.Views
             physicsCallbacks.OnPhysicsTriggerEnter += OnPhysicsTriggerEnter;
         }
 
-        private void OnPhysicsTriggerEnter(PhysicsCallbacks physicsCallbacks, ColliderData colliderData)
+        private void OnPhysicsTriggerEnter(PhysicsCallbacks physicsCallbacks, Collider collider)
         {
-            ICollider collider = colliderData.Collider.GetComponent<ICollider>();
+            ICollider colliderComponent = collider.GetComponent<ICollider>();
 
-            if (collider == null)
+            if (colliderComponent == null)
             {
                 return;
             }
 
-            OnPlayerCollided?.Invoke(collider);
+            OnPlayerCollided?.Invoke(colliderComponent);
         }
     }
 }

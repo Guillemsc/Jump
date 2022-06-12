@@ -1,4 +1,4 @@
-﻿using Juce.CoreUnity.Physics;
+﻿using Juce.CoreUnity.Physics.Callbacks;
 using System;
 using Template.Contents.Stage.Physics.Colliders;
 using UnityEngine;
@@ -25,16 +25,16 @@ namespace Template.Contents.Stage.Player.Views
             physicsCallbacks.OnPhysicsTriggerExit -= OnPhysicsCollisionExit;
         }
 
-        private void OnPhysicsCollisionEnter(PhysicsCallbacks physicsCallbacks, ColliderData colliderData)
+        private void OnPhysicsCollisionEnter(PhysicsCallbacks physicsCallbacks, Collider collider)
         {
-            ICollider collider = colliderData.Collider.gameObject.GetComponent<ICollider>();
+            ICollider colliderComponent = collider.GetComponent<ICollider>();
 
             if (collider == null)
             {
                 return;
             }
 
-            bool isPlatformCollider = collider is PlatformCollider;
+            bool isPlatformCollider = colliderComponent is PlatformCollider;
 
             if (!isPlatformCollider)
             {
@@ -50,16 +50,16 @@ namespace Template.Contents.Stage.Player.Views
             OnIsGroundedChanged?.Invoke(IsGrounded);
         }
 
-        private void OnPhysicsCollisionExit(PhysicsCallbacks physicsCallbacks, ColliderData colliderData)
+        private void OnPhysicsCollisionExit(PhysicsCallbacks physicsCallbacks, Collider collider)
         {
-            ICollider collider = colliderData.Collider.gameObject.GetComponent<ICollider>();
+            ICollider colliderComponent = collider.gameObject.GetComponent<ICollider>();
 
-            if (collider == null)
+            if (colliderComponent == null)
             {
                 return;
             }
 
-            bool isPlatformCollider = collider is PlatformCollider;
+            bool isPlatformCollider = colliderComponent is PlatformCollider;
 
             if (!isPlatformCollider)
             {

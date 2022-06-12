@@ -1,39 +1,41 @@
 ﻿using Juce.Core.Disposables;
 using Juce.Core.Extensions;
-using Juce.Core.Loading;
+using Juce.CoreUnity.Loading.Services;
 using Juce.CoreUnity.Service;
-using System.Threading;
 using System.Threading.Tasks;
-using Template.Contexts.LoadingScreen;
-using Template.Contexts.Shared.Factories;
 using Template.Contexts.Stage;
+using Template.Shared.UseCases;
 
 namespace Template.Contents.Stage.Cheats.UseCases.RestartStage
 {
     public class RestartStageUseCase : IRestartStageUseCase
     {
-        public void Execute() 
+        private readonly ILoadingService loadingService;
+
+        public RestartStageUseCase(
+            ILoadingService loadingService
+            )
         {
-            Run().RunAsync();
+            this.loadingService = loadingService;
         }
 
-        private async Task Run()
+        public void Execute() 
         {
-            ITaskDisposable<ILoadingScreenContextInteractor> loadingScreenContext = ServiceLocator.Get<ITaskDisposable<ILoadingScreenContextInteractor>>();
+            if(loadingService.IsLoading)
+            {
+                return;
+            }
 
-            ITaskLoadingToken taskLoadingToken = await loadingScreenContext.Value.Show(CancellationToken.None);
+            loadingService.Enqueue(
+                ReloadStageUseCase.Execute
+                );
 
-            ITaskDisposable<IStageContextInteractor> stageContext = ServiceLocator.Get<ITaskDisposable<IStageContextInteractor>>();
+            loadingService.Enqueue(() =>
+            {
+                ITaskDisposable<IStageContextInteractor> stageContext = ServiceLocator.Get<ITaskDisposable<IStageContextInteractor>>();
 
-            await stageContext.Dispose();
-
-            stageContext = await ContextFactories.Stage.Create();
-
-            stageContext.Value.Load();
-
-            await taskLoadingToken.Complete();
-
-            stageContext.Value.Start();
+                stageContext.Value.Start();
+            });
         }
     }
 }

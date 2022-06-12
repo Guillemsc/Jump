@@ -8,20 +8,20 @@
       "hash": "23deafec54732c7de41283e78919c25a32eb2b41"
     },
     "com.juce.core": {
-      "version": "git+https://github.com/Juce-Assets/Juce-Core#1.5.3",
+      "version": "git+https://github.com/Juce-Assets/Juce-Core#1.6.7",
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "648d622a515c229aba99907a6e4d53530c420250"
+      "hash": "f75eff3322b1523635e32cafbfb247d90eee41b8"
     },
     "com.juce.coreunity": {
-      "version": "git+https://github.com/Juce-Assets/Juce-CoreUnity#1.5.10",
+      "version": "git+https://github.com/Juce-Assets/Juce-CoreUnity#1.6.12",
       "depth": 0,
       "source": "git",
       "dependencies": {
         "com.juce.core": "https://github.com/Juce-Assets/Juce-Core"
       },
-      "hash": "ec2d01e19d9d67bbfc82be2f2e6391b4295f27ac"
+      "hash": "3507978b069b4a7470b61d950f4a7afec4944d90"
     },
     "com.juce.input": {
       "version": "git+https://github.com/Juce-Assets/Juce-Input",

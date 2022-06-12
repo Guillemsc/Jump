@@ -74,7 +74,7 @@ TrailRenderer:
   m_GameObject: {fileID: 1627567261928127975}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_MotionVectors: 0
   m_LightProbeUsage: 0
@@ -144,7 +144,7 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 0.3647059, b: 0.54901963, a: 1}
+      key0: {r: 1, g: 0.3647059, b: 0.54901963, a: 0.92941177}
       key1: {r: 1, g: 1, b: 1, a: 0}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}

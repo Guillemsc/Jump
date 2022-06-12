@@ -1,4 +1,4 @@
-﻿using Juce.Core.Direction;
+﻿using Juce.Core.Directions;
 using Juce.Core.Time;
 using Juce.CoreUnity.Service;
 using Juce.CoreUnity.Time;

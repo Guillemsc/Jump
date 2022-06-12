@@ -1,4 +1,4 @@
-﻿using Juce.Core.Direction;
+﻿using Juce.Core.Directions;
 
 namespace Template.Contents.Stage.Platform.Data
 {

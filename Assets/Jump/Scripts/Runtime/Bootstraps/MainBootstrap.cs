@@ -1,37 +1,40 @@
-﻿using Juce.Core.Disposables;
-using Juce.CoreUnity.Bootstraps;
+﻿using Juce.CoreUnity.Bootstraps;
 using System.Threading;
 using System.Threading.Tasks;
-using Template.Contexts.Shared.Factories;
-using Template.Contexts.LoadingScreen;
-using Juce.Core.Loading;
 using Template.Contents.Meta.SplashScreenUi.Interactor;
 using Juce.CoreUnity.Service;
 using Juce.CoreUnity.ViewStack.Services;
 using Template.Contents.Shared.Logging;
+using Template.Shared.UseCases;
+using Juce.CoreUnity.Loading.Services;
+using Juce.Core.Extensions;
 
 namespace Template.Bootstraps
 {
     public sealed class MainBootstrap : Bootstrap
     {
+        private readonly CachedService<ILoadingService> loadingService;
+
         protected override async Task Run(CancellationToken cancellationToken)
         {
-            ITaskLoadingToken taskLoadingToken = await SharedBootstrap.LoadCore(cancellationToken);
+            await LoadApplicationMainUseCase.Execute(cancellationToken);
 
-            SharedLoggers.BootstrapLogger.Log("Loading meta context");
+            loadingService.Value.Enqueue(
+                LoadApplicationSecondaryUseCase.Execute,
+                LoadMetaUseCase.Execute
+                );
 
-            await ContextFactories.Meta.Create();
+            loadingService.Value.Enqueue(() =>
+            {
+                SharedLoggers.BootstrapLogger.Log("Starting game");
 
-            SharedLoggers.BootstrapLogger.Log("Starting game");
+                IUiViewStackService uiViewStackService = ServiceLocator.Get<IUiViewStackService>();
 
-            IUiViewStackService uiViewStackService = ServiceLocator.Get<IUiViewStackService>();
-
-            await taskLoadingToken.Complete();
-
-            await uiViewStackService.New()
-                .Show<ISplashScreenUiInteractor>(instantly: false)
-                .Hide<ISplashScreenUiInteractor>(instantly: false)
-                .Execute(cancellationToken);
+                uiViewStackService.New()
+                    .Show<ISplashScreenUiInteractor>(instantly: false)
+                    .Hide<ISplashScreenUiInteractor>(instantly: false)
+                    .Execute(cancellationToken).RunAsync();
+            });
         }
     }
 }

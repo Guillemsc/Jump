@@ -1,4 +1,4 @@
-﻿using Juce.Core.Direction;
+﻿using Juce.Core.Directions;
 using Juce.Core.Disposables;
 using Juce.Core.Factories;
 using Juce.Core.Repositories;

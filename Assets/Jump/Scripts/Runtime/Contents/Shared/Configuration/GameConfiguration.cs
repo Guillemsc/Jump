@@ -1,4 +1,4 @@
-﻿using Juce.Core.Direction;
+﻿using Juce.Core.Directions;
 using Template.Contents.Stage.Platform.Views;
 using Template.Contents.Stage.Player.Views;
 using UnityEngine;

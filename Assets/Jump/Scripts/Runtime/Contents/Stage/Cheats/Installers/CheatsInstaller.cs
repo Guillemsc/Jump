@@ -1,6 +1,7 @@
 ﻿using Juce.Cheats.WidgetsInteractors;
 using Juce.Core.Di.Builder;
 using Juce.Core.Repositories;
+using Juce.CoreUnity.Loading.Services;
 using Template.Contents.Stage.Cheats.UseCases.AddCheats;
 using Template.Contents.Stage.Cheats.UseCases.RemoveCheats;
 using Template.Contents.Stage.Cheats.UseCases.RestartStage;
@@ -31,6 +32,7 @@ namespace Template.Contents.Stage.Cheats.Installers
 
             container.Bind<IRestartStageUseCase>()
                 .FromFunction(c => new RestartStageUseCase(
+                    c.Resolve<ILoadingService>()
                     ));
         }
     }
