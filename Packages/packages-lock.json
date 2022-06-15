@@ -8,11 +8,11 @@
       "hash": "23deafec54732c7de41283e78919c25a32eb2b41"
     },
     "com.juce.core": {
-      "version": "git+https://github.com/Juce-Assets/Juce-Core#1.6.7",
+      "version": "git+https://github.com/Juce-Assets/Juce-Core#1.6.8",
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "f75eff3322b1523635e32cafbfb247d90eee41b8"
+      "hash": "6d7bfadc507dd827ce3c27069e09cea3a59e5f96"
     },
     "com.juce.coreunity": {
       "version": "git+https://github.com/Juce-Assets/Juce-CoreUnity#1.6.12",

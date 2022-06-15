@@ -1,4 +1,5 @@
 ﻿using Juce.Core.Di.Builder;
+using Juce.CoreUnity.ViewStack.Services;
 using Template.Contents.Stage.Camera.UseCases.SetupCamera;
 using Template.Contents.Stage.General.Data;
 using Template.Contents.Stage.General.UseCases.LoadStage;
@@ -28,7 +29,8 @@ namespace Template.Contents.Stage.General.Installers
 
             container.Bind<IStartStageUseCase>()
                 .FromFunction(c => new StartStageUseCase(
-                    c.Resolve<StageStateData>()
+                    c.Resolve<StageStateData>(),
+                    c.Resolve<IUiViewStackService>()
                     ));
         }
     }

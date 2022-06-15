@@ -9,6 +9,7 @@ using Template.Contents.Stage.Physics.Installers;
 using Template.Contents.Stage.Camera.Installers;
 using Template.Contents.Stage.Platform.Installers;
 using Template.Contents.Stage.Death.Installers;
+using Template.Contents.Stage.Points.Installers;
 
 namespace Template.Contexts.Stage
 {
@@ -27,6 +28,7 @@ namespace Template.Contexts.Stage
             container.InstallCamera();
             container.InstallPlayer();
             container.InstallPlatform();
+            container.InstallPoints();
             container.InstallDeath();
 
             container.Bind(context.StageUiInstaller);

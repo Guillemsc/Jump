@@ -1,29 +1,30 @@
-﻿using Juce.Core.Disposables;
-using Juce.Core.Repositories;
-using Template.Contents.Stage.Physics.Colliders;
+﻿using Template.Contents.Stage.Physics.Colliders;
 using Template.Contents.Stage.Platform.UseCases.DespawnOldestPlatform;
 using Template.Contents.Stage.Platform.UseCases.IsPlatformIndexFromLastPlatformSpawned;
 using Template.Contents.Stage.Platform.UseCases.TrySpawnNextPlatform;
 using Template.Contents.Stage.Platform.Views;
 using Template.Contents.Stage.Player.UseCases.SwitchPlayerDirection;
-using Template.Contents.Stage.Player.Views;
+using Template.Contents.Stage.Points.Data;
 
 namespace Template.Contents.Stage.Player.UseCases.PlayerCollidedWithPlatform
 {
     public class PlayerCollidedWithPlatformUseCase : IPlayerCollidedWithPlatformUseCase
     {
+        private readonly PointsData pointsData;
         private readonly ITrySpawnNextPlatformUseCase trySpawnNextPlatformUseCase;
         private readonly IDespawnOldestPlatformUseCase despawnOldestPlatformUseCase;
         private readonly IIsPlatformIndexFromLastPlatformSpawnedUseCase isPlatformIndexFromLastPlatformSpawnedUseCase;
         private readonly ISwitchPlayerDirectionUseCase switchPlayerDirectionUseCase;
 
         public PlayerCollidedWithPlatformUseCase(
+            PointsData pointsData,
             ITrySpawnNextPlatformUseCase trySpawnNextPlatformUseCase,
             IDespawnOldestPlatformUseCase despawnOldestPlatformUseCase,
             IIsPlatformIndexFromLastPlatformSpawnedUseCase isPlatformIndexFromLastPlatformSpawnedUseCase,
             ISwitchPlayerDirectionUseCase switchPlayerDirectionUseCase
             )
         {
+            this.pointsData = pointsData;
             this.trySpawnNextPlatformUseCase = trySpawnNextPlatformUseCase;
             this.despawnOldestPlatformUseCase = despawnOldestPlatformUseCase;
             this.isPlatformIndexFromLastPlatformSpawnedUseCase = isPlatformIndexFromLastPlatformSpawnedUseCase;
@@ -51,6 +52,13 @@ namespace Template.Contents.Stage.Player.UseCases.PlayerCollidedWithPlatform
             }
 
             switchPlayerDirectionUseCase.Execute();
+
+            if(isInitialPlatform)
+            {
+                return;
+            }
+
+            pointsData.Points.Value += 1;
         }
     }
 }

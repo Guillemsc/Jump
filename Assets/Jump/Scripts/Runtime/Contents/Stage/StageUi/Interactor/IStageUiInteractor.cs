@@ -2,6 +2,6 @@
 {
     public interface IStageUiInteractor
     {
-
+        void SetPoints(int points);
     }
 }

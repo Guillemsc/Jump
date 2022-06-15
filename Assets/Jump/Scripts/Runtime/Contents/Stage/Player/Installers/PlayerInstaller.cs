@@ -15,6 +15,7 @@ using Template.Contents.Stage.Player.UseCases.SetInitialPlayerDirection;
 using Template.Contents.Stage.Player.UseCases.SpawnPlayer;
 using Template.Contents.Stage.Player.UseCases.SwitchPlayerDirection;
 using Template.Contents.Stage.Player.Views;
+using Template.Contents.Stage.Points.Data;
 using Template.Contexts.Stage;
 
 namespace Template.Contents.Stage.Player.Installers
@@ -48,6 +49,7 @@ namespace Template.Contents.Stage.Player.Installers
 
             container.Bind<IPlayerCollidedWithPlatformUseCase>()
                 .FromFunction(c => new PlayerCollidedWithPlatformUseCase(
+                    c.Resolve<PointsData>(),
                     c.Resolve<ITrySpawnNextPlatformUseCase>(),
                     c.Resolve<IDespawnOldestPlatformUseCase>(),
                     c.Resolve<IIsPlatformIndexFromLastPlatformSpawnedUseCase>(),

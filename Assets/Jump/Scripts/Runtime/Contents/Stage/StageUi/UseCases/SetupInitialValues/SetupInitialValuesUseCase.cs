@@ -1,21 +1,21 @@
 ﻿using Template.Contents.Stage.StageUi.UseCases.SetPoints;
 
-namespace Template.Contents.Stage.StageUi.Interactor
+namespace Template.Contents.Stage.StageUi.UseCases.SetupInitialValues
 {
-    public class StageUiInteractor : IStageUiInteractor
+    public sealed class SetupInitialValuesUseCase : ISetupInitialValuesUseCase
     {
         private readonly ISetPointsUseCase setPointsUseCase;
 
-        public StageUiInteractor(
+        public SetupInitialValuesUseCase(
             ISetPointsUseCase setPointsUseCase
             )
         {
             this.setPointsUseCase = setPointsUseCase;
         }
 
-        public void SetPoints(int points)
+        public void Execute()
         {
-            setPointsUseCase.Execute(points);
+            setPointsUseCase.Execute(0);
         }
     }
 }
