@@ -29,6 +29,8 @@ namespace Template.Contexts.Stage
             container.InstallPlatform();
             container.InstallDeath();
 
+            container.Bind(context.StageUiInstaller);
+
             container.Bind<IStageContextInteractor>().FromFunction(c => new StageContextInteractor(
                 c.Resolve<ILoadStageUseCase>(),
                 c.Resolve<IStartStageUseCase>()
