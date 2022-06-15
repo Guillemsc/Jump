@@ -43,6 +43,7 @@ namespace Template.Contents.Stage.Platform.UseCases.TrySpawnNextPlatform
             int platformIndex = platformSpawnData.SpawnedPlatformsCount;
 
             bool firstTime = platformIndex == 0;
+            bool secondTime = platformIndex == 1;
 
             HorizontalDirection side = startingPlatformSide;
 
@@ -74,7 +75,9 @@ namespace Template.Contents.Stage.Platform.UseCases.TrySpawnNextPlatform
                 height = getNextPlatformSpawnHeightUseCase.Execute();
             }
 
-            spawnPlatformUseCase.Execute(platformIndex, side, height);
+            bool instantly = firstTime || secondTime;
+
+            spawnPlatformUseCase.Execute(platformIndex, side, height, instantly);
         }
     }
 }

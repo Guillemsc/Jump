@@ -29,7 +29,7 @@ namespace Template.Contents.Stage.Platform.UseCases.SpawnPlatform
             this.platformViewsRightSpawnPosition = platformViewsRightSpawnPosition;
         }
 
-        public void Execute(int platformIndex, HorizontalDirection side, float height)
+        public void Execute(int platformIndex, HorizontalDirection side, float height, bool instantly)
         {
             bool spawned = factory.TryCreate(
                 new PlatformViewFactoryDefinition(platformIndex),
@@ -44,6 +44,8 @@ namespace Template.Contents.Stage.Platform.UseCases.SpawnPlatform
             repository.Add(instance);
 
             SetPosition(instance.Value, side, height);
+
+            instance.Value.AppearTween.Play(instantly);
         }
 
         private void SetPosition(PlatformView instance, HorizontalDirection side, float height)
