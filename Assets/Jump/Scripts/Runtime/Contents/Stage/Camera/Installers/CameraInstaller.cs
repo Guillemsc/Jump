@@ -1,7 +1,9 @@
 ﻿using Juce.Core.Di.Builder;
 using Juce.Core.Disposables;
 using Juce.Core.Repositories;
+using JuceUnity.Core.Di.Extensions;
 using Template.Contents.Stage.Camera.UseCases.SetupCamera;
+using Template.Contents.Stage.Camera.UseCases.UpdateFollowCameraParent;
 using Template.Contents.Stage.Player.Views;
 using Template.Contexts.Stage;
 
@@ -16,6 +18,14 @@ namespace Template.Contents.Stage.Camera.Installers
                     c.Resolve<StageContextInstance>().VirtualCamera,
                     c.Resolve<ISingleRepository<IDisposable<PlayerView>>>()
                     ));
+
+            container.Bind<IUpdateFollowCameraParentUseCase>()
+                .FromFunction(c => new UpdateFollowCameraParentUseCase(
+                     c.Resolve<StageContextInstance>().VirtualCamera,
+                      c.Resolve<StageContextInstance>().FollowCameraParent
+                    ))
+                .LinkToTickablesService(o => o.Execute)
+                .NonLazy();
         }
     }
 }

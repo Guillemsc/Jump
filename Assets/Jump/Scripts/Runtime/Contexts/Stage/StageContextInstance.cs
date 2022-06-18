@@ -8,6 +8,7 @@ namespace Template.Contexts.Stage
     {
         [Header("Camera")]
         [SerializeField] private CinemachineVirtualCamera virtualCamera = default;
+        [SerializeField] private Transform followCameraParent = default;
 
         [Header("Player")]
         [SerializeField] private Transform playerViewParent = default;
@@ -25,6 +26,7 @@ namespace Template.Contexts.Stage
         [SerializeField] private StageUiInstaller stageUiInstaller = default;
 
         public CinemachineVirtualCamera VirtualCamera => virtualCamera;
+        public Transform FollowCameraParent => followCameraParent;
 
         public Transform PlayerViewParent => playerViewParent;
         public Transform PlayerViewSpawnPosition => playerViewSpawnPosition;
