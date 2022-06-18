@@ -56,12 +56,12 @@ namespace Template.Contents.Stage.Player.Views
 
         private void HandleInput()
         {
-            if(Input.GetKeyDown(KeyCode.Space))
+            if(Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
             {
                 StartChargingJump();
             }
             
-            if(Input.GetKeyUp(KeyCode.Space))
+            if(Input.GetKeyUp(KeyCode.Space) || Input.GetMouseButtonUp(0))
             {
                 ReleaseChargingJump();
             }

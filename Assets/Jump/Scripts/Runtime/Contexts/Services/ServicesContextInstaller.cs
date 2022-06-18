@@ -10,6 +10,7 @@ using Template.Contents.Services.Events.Service;
 using Template.Contents.Services.General.Installers;
 using Template.Contents.Services.General.UseCases.LoadServices;
 using Template.Contents.Services.General.UseCases.PreloadServices;
+using Template.Contents.Services.Persistence.Services;
 
 namespace Template.Contexts.Services
 {
@@ -30,6 +31,12 @@ namespace Template.Contexts.Services
             container.Bind<IUiViewStackService>()
                 .FromInstance(new UiViewStackService(
                     context.UiFrame
+                    ))
+                .ToServicesLocator()
+                .NonLazy();
+
+            container.Bind<IPersistenceService>()
+                .FromInstance(new PersistenceService(
                     ))
                 .ToServicesLocator()
                 .NonLazy();

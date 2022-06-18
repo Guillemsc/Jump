@@ -1,6 +1,6 @@
 ﻿using Juce.Core.Di.Builder;
 using Template.Contents.Stage.Points.Data;
-using Template.Contents.Stage.StageUi.Interactor;
+using Template.Contents.Stage.GameUi.Interactor;
 
 namespace Template.Contents.Stage.Points.Installers
 {
@@ -9,7 +9,7 @@ namespace Template.Contents.Stage.Points.Installers
         public static void InstallPoints(this IDiContainerBuilder container)
         {
             container.Bind<PointsData>().FromNew()
-                .WhenInit((c, o) => o.Points.OnChange += c.Resolve<IStageUiInteractor>().SetPoints);
+                .WhenInit((c, o) => o.Points.OnChange += c.Resolve<IGameUiInteractor>().SetPoints);
         }
     }
 }

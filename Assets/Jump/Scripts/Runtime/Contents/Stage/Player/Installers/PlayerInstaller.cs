@@ -2,8 +2,8 @@
 using Juce.Core.Disposables;
 using Juce.Core.Factories;
 using Juce.Core.Repositories;
-using Juce.CoreUnity.Loading.Services;
 using Template.Contents.Services.Configuration.Service;
+using Template.Contents.Stage.End.UseCases.EndGame;
 using Template.Contents.Stage.Platform.UseCases.DespawnOldestPlatform;
 using Template.Contents.Stage.Platform.UseCases.IsPlatformIndexFromLastPlatformSpawned;
 using Template.Contents.Stage.Platform.UseCases.TrySpawnNextPlatform;
@@ -58,7 +58,7 @@ namespace Template.Contents.Stage.Player.Installers
 
             container.Bind<IPlayerCollidedWithDeathUseCase>()
                 .FromFunction(c => new PlayerCollidedWithDeathUseCase(
-                    c.Resolve<ILoadingService>()
+                    c.Resolve<IEndGameUseCase>()
                     ));
 
             container.Bind<ISetInitialPlayerDirectionUseCase>()

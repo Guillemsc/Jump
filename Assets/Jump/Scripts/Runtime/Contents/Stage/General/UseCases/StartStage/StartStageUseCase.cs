@@ -1,7 +1,7 @@
 ﻿using Juce.CoreUnity.ViewStack.Services;
 using Template.Contents.Shared.Logging;
 using Template.Contents.Stage.General.Data;
-using Template.Contents.Stage.StageUi.Interactor;
+using Template.Contents.Stage.GameUi.Interactor;
 
 namespace Template.Contents.Stage.General.UseCases.StartStage
 {
@@ -32,7 +32,7 @@ namespace Template.Contents.Stage.General.UseCases.StartStage
             stageStateData.Started = true;
 
             viewStackService.New()
-                .Show<IStageUiInteractor>(instantly: false)
+                .Show<IGameUiInteractor>(instantly: false)
                 .Execute();
         }
     }

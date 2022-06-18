@@ -5,6 +5,7 @@ using Juce.CoreUnity.ViewStack.Services;
 using JuceUnity.Core.DI.Extensions;
 using Template.Contents.Services.Configuration.Service;
 using Template.Contents.Services.Events.Service;
+using Template.Contents.Services.Persistence.Services;
 
 namespace Template.Contents.Stage.General.Installers
 {
@@ -15,6 +16,7 @@ namespace Template.Contents.Stage.General.Installers
             container.Bind<ILoadingService>().FromServicesLocator();
             container.Bind<ITickablesService>().FromServicesLocator();
             container.Bind<IUiViewStackService>().FromServicesLocator();
+            container.Bind<IPersistenceService>().FromServicesLocator();
             container.Bind<IConfigurationService>().FromServicesLocator();
             container.Bind<IEventsService>().FromServicesLocator();
         }

@@ -2,6 +2,7 @@
 using Juce.CoreUnity.Localization.Services;
 using Template.Contents.Services.General.UseCases.LoadServices;
 using Template.Contents.Services.General.UseCases.PreloadServices;
+using Template.Contents.Services.Persistence.Services;
 
 namespace Template.Contents.Services.General.Installers
 {
@@ -16,7 +17,7 @@ namespace Template.Contents.Services.General.Installers
 
             container.Bind<ILoadServicesUseCase>()
                 .FromFunction(c => new LoadServicesUseCase(
-                    c.Resolve<ILocalizationService>()
+                    c.Resolve<IPersistenceService>()
                     ));
         }
     }

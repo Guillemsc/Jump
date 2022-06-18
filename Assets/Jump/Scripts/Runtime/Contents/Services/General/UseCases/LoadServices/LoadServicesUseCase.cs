@@ -1,29 +1,23 @@
-﻿using Juce.CoreUnity.Localization.Services;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
-using Template.Contents.Shared.Logging;
+using Template.Contents.Services.Persistence.Services;
 
 namespace Template.Contents.Services.General.UseCases.LoadServices
 {
     public class LoadServicesUseCase : ILoadServicesUseCase
     {
-        private readonly ILocalizationService localizationService;
+        private readonly IPersistenceService persistenceService;
 
         public LoadServicesUseCase(
-            ILocalizationService localizationService
+            IPersistenceService persistenceService
             )
         {
-            this.localizationService = localizationService;
+            this.persistenceService = persistenceService;
         }
 
         public async Task Execute(CancellationToken cancellationToken)
         {
-            await localizationService.Load(cancellationToken);
-
-            SharedLoggers.ServicesLogger.Log("Localization loaded with {0} languages and {1} entries",
-                localizationService.LanguagesCount,
-                localizationService.EntriesCount
-                );
+            await persistenceService.Load(cancellationToken);
         }
     }
 }

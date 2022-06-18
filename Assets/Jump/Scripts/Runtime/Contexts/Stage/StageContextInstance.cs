@@ -1,5 +1,6 @@
 ﻿using Cinemachine;
-using Template.Contents.Stage.StageUi.Installers;
+using Template.Contents.Stage.GameUi.Installers;
+using Template.Contents.Stage.PostGameUi.Installers;
 using UnityEngine;
 
 namespace Template.Contexts.Stage
@@ -22,8 +23,9 @@ namespace Template.Contexts.Stage
         [Header("Death")]
         [SerializeField] private Transform deathCollider = default;
 
-        [Header("StageUi")]
-        [SerializeField] private StageUiInstaller stageUiInstaller = default;
+        [Header("Ui")]
+        [SerializeField] private GameUiInstaller gameUiInstaller = default;
+        [SerializeField] private PostGameUiInstaller postGameUiInstaller = default;
 
         public CinemachineVirtualCamera VirtualCamera => virtualCamera;
         public Transform FollowCameraParent => followCameraParent;
@@ -37,6 +39,7 @@ namespace Template.Contexts.Stage
 
         public Transform DeathCollider => deathCollider;
 
-        public StageUiInstaller StageUiInstaller => stageUiInstaller;
+        public GameUiInstaller GameUiInstaller => gameUiInstaller;
+        public PostGameUiInstaller PostGameUiInstaller => postGameUiInstaller;
     }
 }

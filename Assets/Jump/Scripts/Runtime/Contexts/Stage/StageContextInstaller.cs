@@ -10,6 +10,7 @@ using Template.Contents.Stage.Camera.Installers;
 using Template.Contents.Stage.Platform.Installers;
 using Template.Contents.Stage.Death.Installers;
 using Template.Contents.Stage.Points.Installers;
+using Template.Contents.Stage.End.Installers;
 
 namespace Template.Contexts.Stage
 {
@@ -30,8 +31,10 @@ namespace Template.Contexts.Stage
             container.InstallPlatform();
             container.InstallPoints();
             container.InstallDeath();
+            container.InstallEnd();
 
-            container.Bind(context.StageUiInstaller);
+            container.Bind(context.GameUiInstaller);
+            container.Bind(context.PostGameUiInstaller);
 
             container.Bind<IStageContextInteractor>().FromFunction(c => new StageContextInteractor(
                 c.Resolve<ILoadStageUseCase>(),

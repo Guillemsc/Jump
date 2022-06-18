@@ -1,40 +1,38 @@
-﻿using Juce.Core.Disposables;
-using Juce.CoreUnity.Loading.Services;
-using Juce.CoreUnity.Service;
+﻿using Template.Contents.Stage.End.UseCases.EndGame;
 using Template.Contents.Stage.Physics.Colliders;
-using Template.Contexts.Stage;
-using Template.Shared.UseCases;
 
 namespace Template.Contents.Stage.Player.UseCases.PlayerCollidedWithDeath
 {
     public class PlayerCollidedWithDeathUseCase : IPlayerCollidedWithDeathUseCase
     {
-        private readonly ILoadingService loadingService;
+        private readonly IEndGameUseCase endGameUseCase;
 
         public PlayerCollidedWithDeathUseCase(
-            ILoadingService loadingService
+            IEndGameUseCase endGameUseCase
             )
         {
-            this.loadingService = loadingService;
+            this.endGameUseCase = endGameUseCase;
         }
 
         public void Execute(DeathCollider deathCollider)
         {
-            if (loadingService.IsLoading)
-            {
-                return;
-            }
+            endGameUseCase.Execute();
 
-            loadingService.Enqueue(
-                ReloadStageUseCase.Execute
-                );
+            //if (loadingService.IsLoading)
+            //{
+            //    return;
+            //}
 
-            loadingService.Enqueue(() =>
-            {
-                ITaskDisposable<IStageContextInteractor> stageContext = ServiceLocator.Get<ITaskDisposable<IStageContextInteractor>>();
+            //loadingService.Enqueue(
+            //    ReloadStageUseCase.Execute
+            //    );
 
-                stageContext.Value.Start();
-            });
+            //loadingService.Enqueue(() =>
+            //{
+            //    ITaskDisposable<IStageContextInteractor> stageContext = ServiceLocator.Get<ITaskDisposable<IStageContextInteractor>>();
+
+            //    stageContext.Value.Start();
+            //});
         }
     }
 }
