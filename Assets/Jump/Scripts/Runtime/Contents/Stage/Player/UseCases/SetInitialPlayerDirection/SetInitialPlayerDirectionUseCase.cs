@@ -28,7 +28,7 @@ namespace Template.Contents.Stage.Player.UseCases.SetInitialPlayerDirection
                 return;
             }
 
-            playerView.Value.PlayerViewController.SetDirection(initialPlayerDirection);
+            playerView.Value.PlayerViewMovementController.SetDirection(initialPlayerDirection);
         }
     }
 }

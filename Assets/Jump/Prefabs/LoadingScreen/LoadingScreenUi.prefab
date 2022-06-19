@@ -89,7 +89,7 @@ MonoBehaviour:
           wantsToBeBinded: 0
           binded: 0
           bindedVariableName: 
-          FallbackValue: 0.15
+          FallbackValue: 1
         easing:
           bindingEnabled: 0
           wantsToBeBinded: 0
@@ -375,7 +375,6 @@ MonoBehaviour:
   Components:
   - id: 0
   - id: 1
-  - id: 2
   bindingEnabled: 0
   bindableDataUid: 
   references:
@@ -461,17 +460,6 @@ MonoBehaviour:
             m_PreInfinity: 2
             m_PostInfinity: 2
             m_RotationOrder: 4
-    00000002:
-      type: {class: WaitAllAboveComponent, ns: Juce.TweenComponent.Components, asm: Juce.TweenComponent.Runtime}
-      data:
-        folded: 0
-        enabled: 1
-        delay:
-          bindingEnabled: 0
-          wantsToBeBinded: 0
-          binded: 0
-          bindedVariableName: 
-          FallbackValue: 0.2
 --- !u!1 &6947365456568424491
 GameObject:
   m_ObjectHideFlags: 0
@@ -507,7 +495,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &6947365456697916450
 GameObject:

@@ -2,8 +2,8 @@
 using Juce.Core.Di.Installers;
 using Juce.Core.Refresh;
 using Juce.CoreUnity.Loading.Services;
-using Juce.CoreUnity.Pointers.Callbacks;
 using Juce.CoreUnity.TweenComponent;
+using Juce.CoreUnity.Ui.Buttons;
 using Juce.CoreUnity.Ui.ViewStack.Entries;
 using Juce.CoreUnity.Ui.ViewStack.Enums;
 using Juce.CoreUnity.ViewStack.Services;
@@ -29,7 +29,7 @@ namespace Template.Contents.Stage.PostGameUi.Installers
         [SerializeField] private TweenPlayerAnimation hideAnimation = default;
 
         [Header("Play Again")]
-        [SerializeField] private PointerCallbacks playAgainPointerCallbacks = default;
+        [SerializeField] private ButtonCallbacks playAgainButtonCallbacks = default;
 
         [Header("Points")]
         [SerializeField] private TweenPlayer setPointsTween = default;
@@ -70,7 +70,7 @@ namespace Template.Contents.Stage.PostGameUi.Installers
                     c.Resolve<IUiViewStackService>(),
                     c.Resolve<ILoadingService>()
                     ))
-                .WhenInit(o => () => playAgainPointerCallbacks.OnClick += (PointerCallbacks pc, PointerEventData pa) => o.Execute())
+                .WhenInit(o => () => playAgainButtonCallbacks.OnSubmited += (ButtonCallbacks pc, BaseEventData pa) => o.Execute())
                 .NonLazy();
 
             container.Bind<IPostGameUiInteractor>()

@@ -14,6 +14,7 @@ namespace Template.Contexts.Meta
             container.InstallCheats();
 
             container.Bind(context.SplashScreenUiInstaller);
+            container.Bind(context.StartScreenUiInstaller);
 
             container.Bind<IMetaContextInteractor>().FromFunction(c => new MetaContextInteractor(
                 ));

@@ -7,6 +7,7 @@ using Template.Contents.Stage.General.UseCases.StartStage;
 using Template.Contents.Stage.Physics.UseCases.SetupPhysicsConfiguration;
 using Template.Contents.Stage.Platform.UseCases.TrySpawnNextPlatform;
 using Template.Contents.Stage.Player.UseCases.SetInitialPlayerDirection;
+using Template.Contents.Stage.Player.UseCases.SetPlayerMovementEnabled;
 using Template.Contents.Stage.Player.UseCases.SpawnPlayer;
 
 namespace Template.Contents.Stage.General.Installers
@@ -30,7 +31,8 @@ namespace Template.Contents.Stage.General.Installers
             container.Bind<IStartStageUseCase>()
                 .FromFunction(c => new StartStageUseCase(
                     c.Resolve<StageStateData>(),
-                    c.Resolve<IUiViewStackService>()
+                    c.Resolve<IUiViewStackService>(),
+                    c.Resolve<ISetPlayerMovementEnabledUseCase>()
                     ));
         }
     }

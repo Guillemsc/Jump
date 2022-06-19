@@ -1,4 +1,5 @@
 ﻿using Cinemachine;
+using Juce.Core.Di.Installers;
 using Template.Contents.Stage.GameUi.Installers;
 using Template.Contents.Stage.PostGameUi.Installers;
 using UnityEngine;
@@ -39,7 +40,7 @@ namespace Template.Contexts.Stage
 
         public Transform DeathCollider => deathCollider;
 
-        public GameUiInstaller GameUiInstaller => gameUiInstaller;
-        public PostGameUiInstaller PostGameUiInstaller => postGameUiInstaller;
+        public IInstaller GameUiInstaller => gameUiInstaller;
+        public IInstaller PostGameUiInstaller => postGameUiInstaller;
     }
 }

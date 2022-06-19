@@ -9,6 +9,6 @@ namespace Template.Contents.Stage.Player.Views
         [SerializeField] private PlayerViewMovementController playerViewController = default;
 
         public PlayerViewCollisionsController PlayerViewCollisionsController => playerViewCollisionsController;
-        public PlayerViewMovementController PlayerViewController => playerViewController;
+        public PlayerViewMovementController PlayerViewMovementController => playerViewController;
     }
 }

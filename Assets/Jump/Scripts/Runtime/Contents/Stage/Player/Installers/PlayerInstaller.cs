@@ -12,6 +12,7 @@ using Template.Contents.Stage.Player.UseCases.PlayerCollided;
 using Template.Contents.Stage.Player.UseCases.PlayerCollidedWithDeath;
 using Template.Contents.Stage.Player.UseCases.PlayerCollidedWithPlatform;
 using Template.Contents.Stage.Player.UseCases.SetInitialPlayerDirection;
+using Template.Contents.Stage.Player.UseCases.SetPlayerMovementEnabled;
 using Template.Contents.Stage.Player.UseCases.SpawnPlayer;
 using Template.Contents.Stage.Player.UseCases.SwitchPlayerDirection;
 using Template.Contents.Stage.Player.Views;
@@ -69,6 +70,11 @@ namespace Template.Contents.Stage.Player.Installers
 
             container.Bind<ISwitchPlayerDirectionUseCase>()
                 .FromFunction(c => new SwitchPlayerDirectionUseCase(
+                    c.Resolve<ISingleRepository<IDisposable<PlayerView>>>()
+                    ));
+
+            container.Bind<ISetPlayerMovementEnabledUseCase>()
+                .FromFunction(c => new SetPlayerMovementEnabledUseCase(
                     c.Resolve<ISingleRepository<IDisposable<PlayerView>>>()
                     ));
         }

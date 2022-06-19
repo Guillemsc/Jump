@@ -22,6 +22,8 @@ namespace Template.Contents.Stage.Player.Views
         private bool chargingJump;
         private int direction = 1;
 
+        public bool Enabled { get; set; }
+
         public event Action OnChargingJumpStarted;
         public event Action OnChargingJumpFinished;
         public event Action OnChargingJumpCanceled;
@@ -56,6 +58,11 @@ namespace Template.Contents.Stage.Player.Views
 
         private void HandleInput()
         {
+            if(!Enabled)
+            {
+                return;
+            }
+
             if(Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
             {
                 StartChargingJump();

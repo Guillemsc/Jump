@@ -8,6 +8,7 @@ using Template.Contents.Shared.Logging;
 using Template.Shared.UseCases;
 using Juce.CoreUnity.Loading.Services;
 using Juce.Core.Extensions;
+using Template.Contents.Meta.StartScreenUi.Interactor;
 
 namespace Template.Bootstraps
 {
@@ -21,7 +22,8 @@ namespace Template.Bootstraps
 
             loadingService.Value.Enqueue(
                 LoadApplicationSecondaryUseCase.Execute,
-                LoadMetaUseCase.Execute
+                LoadMetaUseCase.Execute,
+                LoadStageUseCase.Execute
                 );
 
             loadingService.Value.Enqueue(() =>
@@ -31,8 +33,9 @@ namespace Template.Bootstraps
                 IUiViewStackService uiViewStackService = ServiceLocator.Get<IUiViewStackService>();
 
                 uiViewStackService.New()
-                    .Show<ISplashScreenUiInteractor>(instantly: false)
+                    .Show<ISplashScreenUiInteractor>(instantly: true)
                     .Hide<ISplashScreenUiInteractor>(instantly: false)
+                    .Show<IStartScreenUiInteractor>(instantly: false)
                     .Execute(cancellationToken).RunAsync();
             });
         }

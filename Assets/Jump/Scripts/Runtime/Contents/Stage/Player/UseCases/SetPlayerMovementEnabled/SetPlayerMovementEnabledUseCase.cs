@@ -2,20 +2,22 @@
 using Juce.Core.Repositories;
 using Template.Contents.Stage.Player.Views;
 
-namespace Template.Contents.Stage.Player.UseCases.SwitchPlayerDirection
+namespace Template.Contents.Stage.Player.UseCases.SetPlayerMovementEnabled
 {
-    public class SwitchPlayerDirectionUseCase : ISwitchPlayerDirectionUseCase
+    public class SetPlayerMovementEnabledUseCase : ISetPlayerMovementEnabledUseCase
     {
         private readonly IReadOnlySingleRepository<IDisposable<PlayerView>> playerRepository;
 
-        public SwitchPlayerDirectionUseCase(
+        public SetPlayerMovementEnabledUseCase(
             IReadOnlySingleRepository<IDisposable<PlayerView>> playerRepository
             )
         {
             this.playerRepository = playerRepository;
         }
 
-        public void Execute()
+
+
+        public void Execute(bool enabled)
         {
             bool playerFound = playerRepository.TryGet(out IDisposable<PlayerView> playerView);
 
@@ -24,7 +26,7 @@ namespace Template.Contents.Stage.Player.UseCases.SwitchPlayerDirection
                 return;
             }
 
-            playerView.Value.PlayerViewMovementController.ToggleDirection();
+            playerView.Value.PlayerViewMovementController.Enabled = enabled;
         }
     }
 }

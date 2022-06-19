@@ -22,6 +22,7 @@ namespace Template.Bootstraps
                 LoadStageUseCase.Execute
                 );
 
+
             loadingService.Value.Enqueue(() =>
             {
                 ITaskDisposable<IStageContextInteractor> stageContext = ServiceLocator.Get<ITaskDisposable<IStageContextInteractor>>();

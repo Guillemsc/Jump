@@ -2,6 +2,7 @@
 using Juce.CoreUnity.Loading.Services;
 using Juce.CoreUnity.Service;
 using Juce.CoreUnity.ViewStack.Services;
+using Template.Contents.Stage.PostGameUi.Interactor;
 using Template.Contexts.Stage;
 using Template.Shared.UseCases;
 
@@ -28,7 +29,7 @@ namespace Template.Contents.Stage.PostGameUi.UseCases.PlayAgain
                 return;
             }
 
-            viewStackService.New().CurrentSetInteractable(false).Execute();
+            viewStackService.SetNotInteractableNow<IPostGameUiInteractor>();
 
             loadingService.Enqueue(
                 ReloadStageUseCase.Execute
