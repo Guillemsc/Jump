@@ -17,7 +17,8 @@ namespace Template.Contents.Stage.Camera.Installers
             container.Bind<ISetupCameraUseCase>()
                 .FromFunction(c => new SetupCameraUseCase(
                     c.Resolve<StageContextInstance>().VirtualCamera,
-                    c.Resolve<ISingleRepository<IDisposable<PlayerView>>>()
+                    c.Resolve<ISingleRepository<IDisposable<PlayerView>>>(),
+                    c.Resolve<IUpdateFollowCameraParentUseCase>()
                     ));
 
             container.Bind<IStopFollowingPlayerUseCase>()

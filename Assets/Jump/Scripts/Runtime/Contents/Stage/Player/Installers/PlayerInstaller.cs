@@ -4,6 +4,7 @@ using Juce.Core.Factories;
 using Juce.Core.Repositories;
 using Template.Contents.Services.Configuration.Service;
 using Template.Contents.Stage.End.UseCases.EndGame;
+using Template.Contents.Stage.Platform.UseCases.ActivatePlatform;
 using Template.Contents.Stage.Platform.UseCases.DespawnOldestPlatform;
 using Template.Contents.Stage.Platform.UseCases.IsPlatformIndexFromLastPlatformSpawned;
 using Template.Contents.Stage.Platform.UseCases.TrySpawnNextPlatform;
@@ -54,7 +55,8 @@ namespace Template.Contents.Stage.Player.Installers
                     c.Resolve<ITrySpawnNextPlatformUseCase>(),
                     c.Resolve<IDespawnOldestPlatformUseCase>(),
                     c.Resolve<IIsPlatformIndexFromLastPlatformSpawnedUseCase>(),
-                    c.Resolve<ISwitchPlayerDirectionUseCase>()
+                    c.Resolve<ISwitchPlayerDirectionUseCase>(),
+                    c.Resolve<IActivatePlatformUseCase>()
                     ));
 
             container.Bind<IPlayerCollidedWithDeathUseCase>()

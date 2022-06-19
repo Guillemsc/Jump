@@ -1,4 +1,5 @@
 ﻿using Template.Contents.Stage.Physics.Colliders;
+using Template.Contents.Stage.Platform.UseCases.ActivatePlatform;
 using Template.Contents.Stage.Platform.UseCases.DespawnOldestPlatform;
 using Template.Contents.Stage.Platform.UseCases.IsPlatformIndexFromLastPlatformSpawned;
 using Template.Contents.Stage.Platform.UseCases.TrySpawnNextPlatform;
@@ -15,13 +16,15 @@ namespace Template.Contents.Stage.Player.UseCases.PlayerCollidedWithPlatform
         private readonly IDespawnOldestPlatformUseCase despawnOldestPlatformUseCase;
         private readonly IIsPlatformIndexFromLastPlatformSpawnedUseCase isPlatformIndexFromLastPlatformSpawnedUseCase;
         private readonly ISwitchPlayerDirectionUseCase switchPlayerDirectionUseCase;
+        private readonly IActivatePlatformUseCase activatePlatformUseCase;
 
         public PlayerCollidedWithPlatformUseCase(
             PointsData pointsData,
             ITrySpawnNextPlatformUseCase trySpawnNextPlatformUseCase,
             IDespawnOldestPlatformUseCase despawnOldestPlatformUseCase,
             IIsPlatformIndexFromLastPlatformSpawnedUseCase isPlatformIndexFromLastPlatformSpawnedUseCase,
-            ISwitchPlayerDirectionUseCase switchPlayerDirectionUseCase
+            ISwitchPlayerDirectionUseCase switchPlayerDirectionUseCase,
+            IActivatePlatformUseCase activatePlatformUseCase
             )
         {
             this.pointsData = pointsData;
@@ -29,6 +32,7 @@ namespace Template.Contents.Stage.Player.UseCases.PlayerCollidedWithPlatform
             this.despawnOldestPlatformUseCase = despawnOldestPlatformUseCase;
             this.isPlatformIndexFromLastPlatformSpawnedUseCase = isPlatformIndexFromLastPlatformSpawnedUseCase;
             this.switchPlayerDirectionUseCase = switchPlayerDirectionUseCase;
+            this.activatePlatformUseCase = activatePlatformUseCase;
         }
 
         public void Execute(PlatformCollider platformCollider)
@@ -53,7 +57,9 @@ namespace Template.Contents.Stage.Player.UseCases.PlayerCollidedWithPlatform
 
             switchPlayerDirectionUseCase.Execute();
 
-            if(isInitialPlatform)
+            activatePlatformUseCase.Execute(platformView);
+
+            if (isInitialPlatform)
             {
                 return;
             }

@@ -5,6 +5,7 @@ using Template.Contents.Stage.Physics.UseCases.SetupPhysicsConfiguration;
 using Template.Contents.Stage.Platform.UseCases.TrySpawnNextPlatform;
 using Template.Contents.Stage.Player.UseCases.SetInitialPlayerDirection;
 using Template.Contents.Stage.Player.UseCases.SpawnPlayer;
+using Template.Contents.Stage.Visuals.UseCases.SimulateParticles;
 
 namespace Template.Contents.Stage.General.UseCases.LoadStage
 {
@@ -16,6 +17,7 @@ namespace Template.Contents.Stage.General.UseCases.LoadStage
         private readonly ISetInitialPlayerDirectionUseCase setInitialPlayerDirectionUseCase;
         private readonly ISetupCameraUseCase setupCameraUseCase;
         private readonly ITrySpawnNextPlatformUseCase trySpawnNextPlatformUseCase;
+        private readonly ISimulateParticlesUseCase simulateParticlesUseCase;
 
         public LoadStageUseCase(
             StageStateData stageStateData,
@@ -23,7 +25,8 @@ namespace Template.Contents.Stage.General.UseCases.LoadStage
             ISpawnPlayerUseCase spawnPlayerUseCase,
             ISetInitialPlayerDirectionUseCase setInitialPlayerDirectionUseCase,
             ISetupCameraUseCase setupCameraUseCase,
-            ITrySpawnNextPlatformUseCase trySpawnNextPlatformUseCase
+            ITrySpawnNextPlatformUseCase trySpawnNextPlatformUseCase,
+            ISimulateParticlesUseCase simulateParticlesUseCase
             )
         {
             this.stageStateData = stageStateData;
@@ -32,6 +35,7 @@ namespace Template.Contents.Stage.General.UseCases.LoadStage
             this.setInitialPlayerDirectionUseCase = setInitialPlayerDirectionUseCase;
             this.setupCameraUseCase = setupCameraUseCase;
             this.trySpawnNextPlatformUseCase = trySpawnNextPlatformUseCase;
+            this.simulateParticlesUseCase = simulateParticlesUseCase;
         }
 
         public void Execute()
@@ -51,6 +55,7 @@ namespace Template.Contents.Stage.General.UseCases.LoadStage
             setInitialPlayerDirectionUseCase.Execute();
             setupCameraUseCase.Execute();
             trySpawnNextPlatformUseCase.Execute();
+            simulateParticlesUseCase.Execute();
         }
     }
 }

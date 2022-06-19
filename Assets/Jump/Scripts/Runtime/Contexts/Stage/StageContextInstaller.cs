@@ -11,6 +11,7 @@ using Template.Contents.Stage.Platform.Installers;
 using Template.Contents.Stage.Death.Installers;
 using Template.Contents.Stage.Points.Installers;
 using Template.Contents.Stage.End.Installers;
+using Template.Contents.Stage.Visuals.Installers;
 
 namespace Template.Contexts.Stage
 {
@@ -31,6 +32,7 @@ namespace Template.Contexts.Stage
             container.InstallPlatform();
             container.InstallPoints();
             container.InstallDeath();
+            container.InstallVisuals();
             container.InstallEnd();
 
             container.Bind(context.GameUiInstaller);

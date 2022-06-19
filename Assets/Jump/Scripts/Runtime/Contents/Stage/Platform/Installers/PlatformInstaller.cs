@@ -5,6 +5,7 @@ using Juce.Core.Repositories;
 using Template.Contents.Services.Configuration.Service;
 using Template.Contents.Stage.Platform.Data;
 using Template.Contents.Stage.Platform.Factories;
+using Template.Contents.Stage.Platform.UseCases.ActivatePlatform;
 using Template.Contents.Stage.Platform.UseCases.DespawnOldestPlatform;
 using Template.Contents.Stage.Platform.UseCases.DespawnPlatform;
 using Template.Contents.Stage.Platform.UseCases.GetNextPlatformSpawnHeight;
@@ -77,6 +78,10 @@ namespace Template.Contents.Stage.Platform.Installers
             container.Bind<IIsPlatformIndexFromLastPlatformSpawnedUseCase>()
                 .FromFunction(c => new IsPlatformIndexFromLastPlatformSpawnedUseCase(
                     c.Resolve<PlatformSpawnData>()
+                    ));
+
+            container.Bind<IActivatePlatformUseCase>()
+                .FromFunction(c => new ActivatePlatformUseCase(
                     ));
         }
     }
