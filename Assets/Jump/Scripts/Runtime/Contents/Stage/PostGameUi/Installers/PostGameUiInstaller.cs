@@ -33,6 +33,7 @@ namespace Template.Contents.Stage.PostGameUi.Installers
 
         [Header("Points")]
         [SerializeField] private TweenPlayer setPointsTween = default;
+        [SerializeField] private TweenPlayer highScoreTween = default;
 
         public void Install(IDiContainerBuilder container)
         {
@@ -62,7 +63,8 @@ namespace Template.Contents.Stage.PostGameUi.Installers
 
             container.Bind<IPlayPointsAnimationUseCase>()
                 .FromFunction(c => new PlayPointsAnimationUseCase(
-                    setPointsTween
+                    setPointsTween,
+                    highScoreTween
                     ));
 
             container.Bind<IPlayAgainUseCase>()

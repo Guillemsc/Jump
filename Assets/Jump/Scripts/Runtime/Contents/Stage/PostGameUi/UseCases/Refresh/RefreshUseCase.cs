@@ -13,7 +13,7 @@ namespace Template.Contents.Stage.PostGameUi.UseCases.Refresh
         private readonly IPlayPointsAnimationUseCase playPointsAnimationUseCase;
 
         public RefreshUseCase(
-            PointsData pointsData,
+             PointsData pointsData,
             IPersistenceService persistenceService,
             IPlayPointsAnimationUseCase playPointsAnimationUseCase
             )
@@ -36,7 +36,7 @@ namespace Template.Contents.Stage.PostGameUi.UseCases.Refresh
 
             persistenceService.PlayerProgress.Save(CancellationToken.None).RunAsync();
 
-            playPointsAnimationUseCase.Execute(pointsData.Points.Value);
+            playPointsAnimationUseCase.Execute(pointsData.Points.Value, isHighScore);
         }
     }
 }

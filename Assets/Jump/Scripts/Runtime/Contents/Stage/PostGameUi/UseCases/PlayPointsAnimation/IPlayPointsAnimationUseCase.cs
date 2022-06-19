@@ -2,6 +2,6 @@
 {
     public interface IPlayPointsAnimationUseCase
     {
-        void Execute(int points);
+        void Execute(int points, bool highScore);
     }
 }
